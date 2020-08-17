@@ -1,0 +1,113 @@
+extends base
+
+mixin navItem(link, text, icon, active)
+  li(class=`${active ? 'side-nav--active' : ''}`)
+    a(href=`${link}`)
+      svg
+        use(xlink:href=`img/icons.svg#icon-${icon}`)
+      | #{text}
+
+block content
+  main.main
+    .user-view
+      nav.user-view__menu
+        ul.side-nav
+        - if (user.role === 'admin')
+          .admin-nav
+            h5.admin-nav__heading Admin
+            ul.side-nav
+              +navItem('/animesAdmin', 'gérer animes', 'map')
+              +navItem('/animeUpdate', 'modifier un animes', 'map')
+              +navItem('#', 'Manage users', 'users')
+              +navItem('#', 'Manage reviews', 'star')
+              +navItem('#', 'Manage bookings', 'briefcase')
+      .user-view__content
+        .user-view__form-container
+          h2.heading-secondary.ma-bt-md ajouter un anime
+        
+          form.form.form-anime-data
+            .form__group
+              label.form__label(for='name') Name
+              input#name.form__input(type='text', required, name='name')
+            .form__group.form__photo-upload
+              input.form__upload(type='file', accept='image/*', id='imageCover', name='imageCover')
+              label(for='imageCover') Choisir une image de couverture
+            .form__group.ma-bt-md
+              label.form__label(for='episodeNumber') Nombre d'épisode (1 pour film)
+              input#episodeNumber.form__input(type='number', name='episodeNumber')
+            .form__group.ma-bt-md
+              label.form__label(for='duration') Durée total en minutes
+              input#duration.form__input(type='number', required, name='duration')
+            .form__group.ma-bt-md
+              label.form__label(for='type') Type de l'anime
+              select#type.form__input(required, name='type')
+                option(value='anime') Anime
+                option(value='film') Film
+                option(value='autre') Autre
+            .form__group
+              label.form__label(for='genre') Genre(ex: Action, Comedie, Foo)
+              input#genre.form__input(type='text', required, name='genre')    
+            .form__group
+              label.form__label(for='description') Synopsis
+              textarea#description.form__input(type='text', required, name='description')
+            .form__group
+              label.form__label(for='startDates') Date de sortie / début de diffusion 
+              input#startDates.form__input(type='date', required, name='startDates')   
+            .form__group
+              label.form__label(for='endDates') Date de fin si il y a 
+              input#endDates.form__input(type='date', name='endDates')       
+            .form__group.form__photo-upload
+              input.form__upload(type='file', accept='image/*', id='images', name='images')
+              label(for='images') Gallerie d'images
+              
+            .form__group.right
+              button.btn.btn--small.btn--green Save settings
+        
+        .user-view__form-container
+            h2.heading-secondary.ma-bt-md modifier  un anime
+              each anime in animes
+                form.form.form-anime-update-data
+                  .form__group
+                    label.form__label(for='id') 
+                    h4.heading-tertirary
+                    span= anime.id
+                    input#id.form__input(type='text',value=`${anime.id}`, name='id')
+                  .form__group
+                    label.form__label(for='name') Name:
+                    h4.heading-tertirary
+                    span= anime.name
+                    input#name.form__input(type='text', value=`${anime.name}`, name='name')
+                  .form__group.form__photo-upload
+                    img.form__user-photo(src=`/img/animes/${anime.imageCover}`, alt='image cover')
+                    input.form__upload(type='file', accept='image/*', id='imageCover', name='imageCover')
+                    label(for='imageCover') Choisir une nouvelle image de couverture
+                  .form__group.ma-bt-md
+                    label.form__label(for='episodeNumber') Nombre d'épisode (1 pour film)
+                    input#episodeNumber.form__input(type='number', value=`${anime.episodeNumber}`,  name='episodeNumber')
+                  .form__group.ma-bt-md
+                    label.form__label(for='duration') Durée total en minutes
+                    input#duration.form__input(type='number', value=`${anime.duration}`,  name='duration')
+                  .form__group.ma-bt-md
+                    label.form__label(for='type') Type de l'anime
+                    select#type.form__input( name='type', value=`${anime.type}`, )
+                      option(value='anime') Anime
+                      option(value='film') Film
+                      option(value='autre') Autre
+                  .form__group
+                    label.form__label(for='genre') Genre(ex: Action, Comedie, Foo)
+                    input#genre.form__input(type='text', value=`${anime.genre}`,  name='genre')
+                  .form__group
+                    label.form__label(for='description') Synopsis
+                    textarea#description.form__input(type='text', value=`${anime.description}`,  name='description')
+                  .form__group
+                    label.form__label(for='startDates') Date de sortie / début de diffusion 
+                    input#startDates.form__input(type='date', value=`${anime.startDates}`, name='startDates')   
+                  .form__group
+                    label.form__label(for='endDates') Date de fin si il y a 
+                    input#endDates.form__input(type='date', value=`${anime.endDates}`, name='endDates')       
+                  .form__group.form__photo-upload
+                    input.form__upload(type='file', accept='image/*', id='images', name='images')
+                    label(for='images') Gallerie d'images
+                    
+                  .form__group.right
+                    button.btn.btn--small.btn--green Save settings 

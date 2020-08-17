@@ -1,0 +1,38 @@
+extends base
+
+block content
+  main.main
+    .card-container
+    
+      each anime in animes
+        .card
+          .card__header
+            .card__picture
+              .card__picture-overlay &nbsp;
+              img.card__picture-img(src=`/img/animes/${anime.imageCover}`, alt=`${anime.name}`)
+            h3.heading-tertirary
+              span= anime.name
+
+          .card__details
+            h4.card__sub-heading= `${anime.episodeNumber}-${anime.type}`
+            p.card__text= anime.summary
+            .card__data
+              svg.card__icon
+                use(xlink:href='/img/icons.svg#icon-map-pin')
+              span= anime.genre
+            .card__data
+              svg.card__icon
+                use(xlink:href='/img/icons.svg#icon-calendar')
+              span= anime.startDates[0].toLocaleString('fr', {month: 'long', year: 'numeric'})
+            
+            .card__data
+              svg.card__icon
+                use(xlink:href='/img/icons.svg#icon-user')
+              span= `${anime.duration} minutes`
+
+          .card__footer
+            p.card__ratings
+              span.card__footer-value= anime.ratingsAverage
+              | 
+              span.card__footer-text= `rating (${anime.ratingsQuantity})`
+            a.btn.btn--green.btn--small(href=`/anime/${anime.slug}`) Details
