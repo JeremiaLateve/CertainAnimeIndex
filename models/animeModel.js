@@ -70,7 +70,8 @@ const animeSchema = new mongoose.Schema(
       trim: true
     },
     imageCover: {
-      type: String
+      type: String,
+      required:[true, 'A anime must have a duration']
     },
     images: [String],
     createdAt: {

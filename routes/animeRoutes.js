@@ -40,6 +40,7 @@ router
     authController.protect,
     authController.restrictTo('admin'),
     animeController.uploadAnimeImages,
+    animeController.resizeAnimeImages,
     animeController.createAnime
   );
 
