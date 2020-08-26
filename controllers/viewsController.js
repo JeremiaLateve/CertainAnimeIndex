@@ -76,7 +76,6 @@ exports.getAdminAnimeForm = catchAsync(async (req, res, next) => {
 
 exports.getUpdateAnimeForm = catchAsync(async (req, res, next) => {
   const animes = await Anime.find();
-  
   res.status(200).render('animeUpdate', {
     title: 'Ajouts des animes',
     animes

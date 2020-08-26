@@ -30,6 +30,11 @@ block content
                 use(xlink:href='/img/icons.svg#icon-user')
               span= `${anime.duration} minutes`
 
+            .card__data
+              svg.card__icon
+                use(xlink:href='/img/icons.svg#icon-calendar')
+              span= anime.endDates[0].toLocaleString('fr', {month: 'long', year: 'numeric'})
+
           .card__footer
             p.card__ratings
               span.card__footer-value= anime.ratingsAverage

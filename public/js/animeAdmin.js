@@ -44,6 +44,7 @@ export const animeAdmin = async (data) => {
 
     });
     console.log(res);
+    console.log(req.body);
     if (res.data.status === 'success') {
       showAlert('success', 'Anime ajouté avec succès!');
       window.setTimeout(() => {
