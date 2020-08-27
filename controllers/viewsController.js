@@ -52,7 +52,6 @@ exports.getAnimeReview = catchAsync(async (req, res, next) => {
   if (!anime) {
     return next(new AppError('There is no anime with that name.', 404));
   }
-
   // 2) Build template
   // 3) Render template using data from 1)
   res.status(200).render('review', {

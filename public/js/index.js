@@ -46,10 +46,17 @@ if (updateAnimeForm)
     updateAnime(id, form, 'data');
 });
 
+// if(reviewAnimeForm)
+// reviewAnimeForm.addEventListener('submit', e => {
+//   const form = new FormData();
+//   form.append('review', document.getElementById('review').value);
+//   form.append('rating', document.getElementById('rating').value);
+//   reviewAnime(form, 'data');
+// });
+
 if(reviewAnimeForm)
 reviewAnimeForm.addEventListener('submit', e => {
-  e.preventDefault();
-  const review = getElementById('review').value;
+  const review = document.getElementById('review').value;
   const rating = document.getElementById('rating').value;
   reviewAnime(review, rating);
 });

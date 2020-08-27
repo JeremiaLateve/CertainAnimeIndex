@@ -8695,6 +8695,13 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+// export const reviewAnime = async (data) => {
+//     try {
+//       const res = await axios({
+//         method: 'POST',
+//         url: '/api/v1/reviews',
+//         data
+//       });
 var reviewAnime = /*#__PURE__*/function () {
   var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(review, rating) {
     var res;
@@ -8706,7 +8713,7 @@ var reviewAnime = /*#__PURE__*/function () {
             _context.next = 3;
             return (0, _axios.default)({
               method: 'POST',
-              url: '/api/v1/review',
+              url: '/api/v1/reviews',
               data: {
                 review: review,
                 rating: rating
@@ -8715,6 +8722,7 @@ var reviewAnime = /*#__PURE__*/function () {
 
           case 3:
             res = _context.sent;
+            console.log(data);
 
             if (res.data.status === 'success') {
               (0, _alerts.showAlert)('success', 'évaluation réussi!');
@@ -8723,20 +8731,20 @@ var reviewAnime = /*#__PURE__*/function () {
               }, 1500);
             }
 
-            _context.next = 10;
+            _context.next = 11;
             break;
 
-          case 7:
-            _context.prev = 7;
+          case 8:
+            _context.prev = 8;
             _context.t0 = _context["catch"](0);
             (0, _alerts.showAlert)('error', _context.t0.response.data.message);
 
-          case 10:
+          case 11:
           case "end":
             return _context.stop();
         }
       }
-    }, _callee, null, [[0, 7]]);
+    }, _callee, null, [[0, 8]]);
   }));
 
   return function reviewAnime(_x, _x2) {
@@ -9059,10 +9067,16 @@ if (updateAnimeForm) updateAnimeForm.addEventListener('submit', function (e) {
   form.append('images', document.getElementById('images').files[0]);
   console.log(form);
   (0, _updateAnime.updateAnime)(id, form, 'data');
-});
+}); // if(reviewAnimeForm)
+// reviewAnimeForm.addEventListener('submit', e => {
+//   const form = new FormData();
+//   form.append('review', document.getElementById('review').value);
+//   form.append('rating', document.getElementById('rating').value);
+//   reviewAnime(form, 'data');
+// });
+
 if (reviewAnimeForm) reviewAnimeForm.addEventListener('submit', function (e) {
-  e.preventDefault();
-  var review = getElementById('review').value;
+  var review = document.getElementById('review').value;
   var rating = document.getElementById('rating').value;
   (0, _review.reviewAnime)(review, rating);
 });
@@ -9194,7 +9208,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51373" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51318" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
