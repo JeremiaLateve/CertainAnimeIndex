@@ -10,10 +10,10 @@ const router = express.Router();
 // POST /anime/234fad4/reviews
 // GET /anime/234fad4/reviews
 
-router.use('/:animeId/reviews', reviewRouter);
+router.use('/:slug/reviews', reviewRouter);
 
 router
-  .route('/top-5-cheap')
+  .route('/top-5')
   .get(animeController.aliasTopAnimes, animeController.getAllAnimes);
 
 router.route('/anime-stats').get(animeController.getAnimeStats);

@@ -7,7 +7,8 @@ import { bookTour } from './stripe';
 import { showAlert } from './alerts';
 import { signup } from './signup';
 import { animeAdmin } from './animeAdmin';
-import { updateAnime } from './updateAnime'
+import { updateAnime } from './updateAnime';
+import { reviewAnime} from './review';
 
 // DOM ELEMENTS
 const mapBox = document.getElementById('map');
@@ -19,6 +20,7 @@ const bookBtn = document.getElementById('book-tour');
 const signupForm = document.querySelector('.form--signup');
 const animeAdminForm = document.querySelector('.form-anime-data')
 const updateAnimeForm = document.querySelector('.form-anime-update-data')
+const reviewAnimeForm = document.querySelector('.form-anime-review')
 // DELEGATION
 if (mapBox) {
   const locations = JSON.parse(mapBox.dataset.locations);
@@ -42,6 +44,14 @@ if (updateAnimeForm)
     form.append('images',  document.getElementById('images').files[0]);
     console.log(form)
     updateAnime(id, form, 'data');
+});
+
+if(reviewAnimeForm)
+reviewAnimeForm.addEventListener('submit', e => {
+  e.preventDefault();
+  const review = getElementById('review').value;
+  const rating = document.getElementById('rating').value;
+  reviewAnime(review, rating);
 });
 
 if(signupForm)
@@ -84,6 +94,9 @@ if(animeAdminForm)
   form.append('startDates', document.getElementById('startDates').value);
   form.append('endDates', document.getElementById('endDates').value);
   form.append('images',  document.getElementById('images').files[0]);
+  form.append('images',  document.getElementById('images').files[1]);
+  form.append('images',  document.getElementById('images').files[2]);
+
   console.log(form)
   animeAdmin(form, 'data');
  });

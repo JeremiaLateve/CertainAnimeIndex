@@ -32,15 +32,15 @@ block content
     .overview-box
       div
         .overview-box__group
-          h2.heading-secondary.ma-bt-lg Quick facts
+          h2.heading-secondary.ma-bt-lg Infos
 
-          - const date = anime.startDates[0].toLocaleString('en-us', {month: 'long', year: 'numeric'})
+          - const date = anime.startDates[0].toLocaleString('fr-FR', {month: 'long', year: 'numeric'})
           
           +overviewBox('type', anime.type, '')
           +overviewBox('genre', anime.genre, '')
           +overviewBox('Rating', `${anime.ratingsAverage} / 5`, 'star')
     .description-box
-      h2.heading-secondary.ma-bt-lg= `About ${anime.name} anime`
+      h2.heading-secondary.ma-bt-lg= `A propos de ${anime.name} `
       - const parapraphs = anime.description.split('\n');
       each p in parapraphs
         p.description__text= p
@@ -48,7 +48,7 @@ block content
   section.section-pictures
     each img, i in anime.images
       .picture-box
-        img.picture-box__img(src=`/img/animes/${img}`, alt=`The Park Camper Anime ${i + 1}`, class=`picture-box__img--${i + 1}`)
+        img.picture-box__img(src=`/img/animes/${img}`, alt=`${i + 1}`, class=`picture-box__img--${i + 1}`)
 
   section.section-reviews
     .reviews
@@ -62,11 +62,11 @@ block content
       img.cta__img.cta__img--1(src=`/img/animes/${anime.images[1]}`, alt='Anime picture')
       img.cta__img.cta__img--2(src=`/img/animes/${anime.images[2]}`, alt='Anime picture')
       .cta__content
-        h2.heading-secondary What are you waiting for?
-        p.cta__text= `${anime.duration} days. 1 adventure. Infinite memories. Make it yours today!`
+        h2.heading-secondary Vous avez apprécié cette anime ? Vous l'avez détester ? 
+        p.cta__text= `${anime.duration} minutes. 1 histoire.`
         
         if user
-          a.btn.btn--green.btn--small(href=`/anime/${anime.id}/review`) Laissez un avis
-          button.btn.btn--green.span-all-rows#book-anime(data-anime-id=`${anime.id}`) Book anime now!
+          a.btn.btn--green.btn--small(href=`/anime/${anime.slug}/review`) Laissez un avis
+          
         else
-          a.btn.btn--green.span-all-rows(href='/login') Log in to book anime
+          a.btn.btn--green.span-all-rows(href='/login') Connecter vous pour laisser des avis

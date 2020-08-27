@@ -9,9 +9,7 @@ export const updateAnime = async (form, id) => {
     const res = await axios({
       method: 'PATCH',
       url,
-      data{
-        form
-      }
+      data
     });
 
     if (res.data.status === 'success') {
