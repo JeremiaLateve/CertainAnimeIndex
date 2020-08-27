@@ -13,19 +13,20 @@ exports.alerts = (req, res, next) => {
 };
 
 exports.getOverview = catchAsync(async (req, res, next) => {
-  // 1) Get anime data from collection
+  // 1) Récupère les données depuis la collection
   const animes = await Anime.find();
 
-  // 2) Build template
-  // 3) Render that template using anime data from 1)
+  // 2) Créer la templte
+  // 3) rend la template avec les données
   res.status(200).render('overview', {
-    title: 'All Animes',
+    title: 'Tout les Animes',
+    description: 'Bienvue sur A Certain Anime Index',
     animes
   });
 });
 
 exports.getAnime = catchAsync(async (req, res, next) => {
-  // 1) Get the data, for the requested anime (including reviews and guides)
+  // 1) récupère les données pour l'anime demandé (y compris les avis )
   const anime = await Anime.findOne({ slug: req.params.slug }).populate({
     path: 'reviews',
     fields: 'review rating user'
@@ -35,17 +36,18 @@ exports.getAnime = catchAsync(async (req, res, next) => {
     return next(new AppError('There is no anime with that name.', 404));
   }
 
-  // 2) Build template
-  // 3) Render template using data from 1)
+  // 2) construit la template
+  // 3) créer la tempalte avec les donénes du 1)
   res.status(200).render('anime', {
     title: `${anime.name} Anime`,
+    description: 'ici vous avec accès au détails',
     anime
   });
 });
 
 exports.getAnimeReview = catchAsync(async (req, res, next) => {
   // 1) Get the data, for the requested anime (including reviews and guides)
-  const anime = await Anime.findOne({ id: req.params.id });
+  const anime = await Anime.findOne({ slug: req.params.slug });
 
   if (!anime) {
     return next(new AppError('There is no anime with that name.', 404));
@@ -54,14 +56,15 @@ exports.getAnimeReview = catchAsync(async (req, res, next) => {
   // 2) Build template
   // 3) Render template using data from 1)
   res.status(200).render('review', {
-    title: `${anime.id} avis`,
+    title: `${anime.name} avis`,
     anime
   });
 });
 
 exports.getSignupForm = (req, res) => {
   res.status(200).render('signup', {
-    title: 'Create an account'
+    title: 'Create an account',
+    description: 'ici vous créer votre compte'
   });
 };
 

@@ -23,7 +23,7 @@ block content
             .card__data
               svg.card__icon
                 use(xlink:href='/img/icons.svg#icon-calendar')
-              span= anime.startDates[0].toLocaleString('fr', {month: 'long', year: 'numeric'})
+              span= anime.startDates[0].toLocaleString('fr-FR', {month: 'long', year: 'numeric'})
             
             .card__data
               svg.card__icon
@@ -33,7 +33,7 @@ block content
             .card__data
               svg.card__icon
                 use(xlink:href='/img/icons.svg#icon-calendar')
-              span= anime.endDates[0].toLocaleString('fr', {month: 'long', year: 'numeric'})
+              span= anime.endDates[0].toLocaleString('fr-FR', {month: 'long', year: 'numeric'})
 
           .card__footer
             p.card__ratings
